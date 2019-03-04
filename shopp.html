@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购买图书证</title>
+    <meta id="viewport" name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css">
+    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body class="gmtsz iconfont">
+    <div class="weui-flex header bg_gg pd_rl15 box_s clearfix">
+      <a href="javascript:history.go(-1);" class="header_l col_f fl fs16"><em class="fs20">&#xe647;</em>返回</a>
+      <div class="weui-flex__item txt_cen fs18 col_f">购买图书证</div>
+      <div class="header_r fr fs16 col_t"><em class="fs20">&#xe62a;</em>搜索</div>
+    </div>
+
+<form method="GET" action="shopp.html" name="shopp">
+    <div class="weui-cells weui-cells_checkbox mt55 bor_b">
+      <div class="weui-cell bor_b">
+        <div class="weui-cell__bd fs16">价格：<em class="col_gg fs16">100</em></div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__hd fs16 zffs">支付方式：</div>
+        <label class="weui-cell__bd weui-check__label" for="s12">
+            <div class="weui-cell__bd">
+              <input type="radio" class="weui-check" name="zf" value="支付宝" id="s12" checked>
+              <i class="weui-icon-checked"></i>
+              <span class="fr fs16"><em class="icon_zfb fs22 ">&#xe665;</em> 支付宝</span>
+            </div>
+        </label>
+      </div>
+      <div class="weui-cell pd_rl15 mb5">
+        <div class="weui-cell__hd fs16 zffs"></div>
+        <label class="weui-cell__bd weui-check__label" for="s11">
+            <div class="weui-cell__hd">
+              <input type="radio" class="weui-check" name="zf" value="微信" id="s11">
+              <i class="weui-icon-checked"></i>
+              <span class="fr fs16"> <em class="icon_wx fs22 ">&#xe62b;</em> 微信</span>
+            </div>
+        </label>
+      </div>
+    </div>
+</form>
+
+    <div class="footer_but pd_rl15 box_s">
+       <a href="javascript:document:shopp.submit();" class="weui-btn weui-btn_warn bg_gg confirm">确认支付</a>
+    </div>
+
+
+
+  <script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-weui.min.js"></script>
+	<script>
+   $('.gmtsz').on('click', '#s11', function(event) {
+       $.toast.prototype.defaults.duration='1500';
+       if($('#s11').is(':checked')){
+           $.toast("暂未开通微信支付！", "text");
+           $(this).prop('checked','false')
+           $('#s12').prop('checked','true');
+       }
+   }); 
+  </script>
+</body>
+</html>

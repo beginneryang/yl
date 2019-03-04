@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta id="viewport" name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css">
+    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body class="login iconfont">
+      <div class="weui-flex logo txt_cen">
+        <div class="weui-flex__item">
+            <a class="logo_img"><img src="images/log.png"></a>
+            <a class="text">
+               <span class="fs20">美利华在线健康大学</span>
+               <span class="fs14">Meilihua Health University</span>
+             </a>
+        </div>
+      </div>
+
+      <form method="POST" action="index.html" name="login">
+      <div class="bg_f pd_rl15 box_s form_div">
+           <div class="inp_div fs16  weui-flex">
+             手机号：<input type="text" name="phone" class="bor_0 inp_on fs16 phone" placeholder="请输入您的手机号" minlength="11" maxlength="11" required>
+           </div>
+            <div class="inp_div fs16  weui-flex mb10"> 
+             密&nbsp;&nbsp;&nbsp;码：<input type="password" name="pass" class="bor_0 inp_on fs16 pass" placeholder="请输入您的密码">
+           </div>
+           <div class="txt_right">
+              <a href="register.html" class="fs16 col_3">立即注册</a>
+           </div>
+      </div>
+      </form>
+
+      <div class="footer_but pd_rl15 box_s">
+         <a href="javascript:document.login.submit();" class="weui-btn weui-btn_warn bg_gg mt15 mb10 fs16">登录</a>
+         <div class="txt_right">
+            <a href="###" class="fs14 col_3">遇到问题？<i class="col_gg">联系我们</i></a>
+         </div>
+      </div>
+
+
+  <script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-weui.min.js"></script>
+	<script>
+    $.toast.prototype.defaults.duration='1000';
+    $('.login').on('click', '.weui-btn', function() {
+       var ph= $(".phone").val();
+       var ps= $(".pass").val();
+       var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+       if(ph==''){
+         $.toast("请填写手机号", "text");
+         return false;
+       }
+       if(!myreg.test(ph)){
+         $.toast("请输入有效的手机号码！", "text");
+         return false;
+       }
+       if(ps==''){
+         $.toast("请填写您的密码！", "text");
+         return false;
+       }
+    });
+  </script>
+</body>
+</html>

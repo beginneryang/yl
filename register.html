@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <meta id="viewport" name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css">
+    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body class="login register iconfont">
+      <div class="weui-flex logo txt_cen">
+        <div class="weui-flex__item">
+            <a class="logo_img"><img src="images/log.png"></a>
+            <a class="text">
+               <span class="fs20">美利华在线健康大学</span>
+               <span class="fs14">Meilihua Health University</span>
+             </a>
+        </div>
+      </div>
+
+      <form method="POST" action="login.html" name='register'>
+      <div class="bg_f pd_rl15 box_s form_div">
+           <div class="inp_div fs16 weui-flex">
+             姓&nbsp;&nbsp;&nbsp;名：<input type="text" name="name" class="fs16 bor_0 inp_on name" placeholder="请输入您的姓名" required>
+           </div>
+           <div class="inp_div fs16   weui-flex">
+             手机号：<input type="text" name="phone" class=" fs16 bor_0 inp_on phone" placeholder="请输入您的手机号" minlength="11" maxlength="11" required>
+           </div>
+           <div class="inp_div fs16 yzm_div weui-flex">
+             验证码：<input type="text" name="yzm" class=" fs16 bor_0 inp_on yzm" placeholder="请输入您的验证码"  required><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default Code">获取验证码</a>
+           </div>
+            <div class="inp_div fs16   weui-flex">
+             设置密码：<input type="password" name="pass" class=" fs16 bor_0 inp_on pass1" placeholder="请输入字母,数字组合6-20个字符" minlength="6" maxlength="12" required>
+           </div>
+           <div class="inp_div fs16   weui-flex">
+             确认密码：<input type="password" name="pass" class=" fs16 bor_0 inp_on pass2" placeholder="请输入字母,数字组合6-20个字符" required>
+           </div>
+           <div class="inp_div fs16   weui-flex">
+             邮&nbsp;&nbsp;&nbsp;箱：<input type="text" name="mailbox" class=" fs16 bor_0 inp_on mailbox" placeholder="请输入您的邮箱" required>
+           </div>
+      </div>
+      </form>
+
+      <div class="footer_but pd_rl15 box_s">
+         <a href="javascript:document.register.submit();" class="weui-btn weui-btn_warn bg_gg mt15 mb10 fs16">注册</a>
+         <div class="txt_right">
+            <a href="login.html" class="fs14 col_3">已有账号？<i class="col_gg">点击登录</i></a>
+         </div>
+      </div>
+
+  <script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-weui.min.js"></script>
+	<script>
+    $.toast.prototype.defaults.duration='1000';
+    $('.register').on('click','.Code', function() {
+         var txt =$('.Code').text();
+         var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+         if(txt == '获取验证码'){
+               var phone =$(".phone").val();
+               if(phone == ''){
+                  alert('请输入手机号！')
+                  return false;
+                }
+               if(!myreg.test(phone)){
+                  alert('请输入有效的手机号！')
+                  return false;
+                }
+               else{
+                    $.ajax({
+                      type:'GET',
+                      url:'index.html',
+                      data:{ 
+                        phone:phone
+                      },
+                      success:function(data){
+                       if(data==1){
+                            $('.Code').html("<span>60</span>s");
+                            var time=parseInt($(".Code span").text());
+                            setTime=setInterval(function(){
+                                if(time<=0){
+                                    $('.Code').html("获取验证码");
+                                    clearInterval(setTime);
+                                    return;
+                                }
+                                time--;
+                                $(".Code span").text(time);
+                             },1000);
+                       }else{
+                             $.toast("获取失败！", "text");
+                       }
+                      },
+                      error:function(){ 
+                        $.toast("网络请求失败！", "text");
+                      }
+                    })
+               }
+         }
+         else{
+           return false;
+         }
+       });
+     $('.register').on('click', '.weui-btn_warn', function() {
+       var na= $(".name").val();
+       var ph= $(".phone").val();
+       var yzm= $(".yzm").val();
+       var ps1= $(".pass1").val();
+       var ps2= $(".pass2").val();
+       var mb= $(".mailbox").val();
+       var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+       var reg =/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/;
+       if(na==''){
+         $.toast("请填写姓名！", "text");
+         return false;
+       }
+       if(ph==''){
+         $.toast("请填写手机号", "text");
+         return false;
+       }
+       if(!myreg.test(ph)){
+         $.toast("请输入有效的手机号码！", "text");
+         return false;
+       }
+       if(yzm==''){
+         $.toast("请填写验证码！", "text");
+         return false;
+       }
+       if(ps1==''){
+         $.toast("请设置密码！", "text");
+         return false;
+       }
+       if(ps1.length >=6 && reg.test(ps1)){
+          console.log('密码正确！')
+       }else{
+           $.toast("请输入字母,数字组合6-20个字符!", "text");
+           return false;
+        }
+       if(ps2==''){
+         $.toast("请填写确认密码！", "text");
+         return false;
+       }
+       if(ps2!==ps1){
+          $.toast("两次密码不一致！", "text");
+          return false;
+       }
+       if(mb==''){
+         $.toast("请填写邮箱！", "text");
+         return false;
+       }
+    });
+  </script>
+</body>
+</html>

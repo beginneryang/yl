@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言</title>
+    <meta id="viewport" name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css">
+    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body class="ly iconfont">
+
+   <div class="weui-flex header bg_gg pd_rl15 box_s clearfix">
+      <a href="javascript:history.go(-1);" class="header_l col_f fl fs16"><em class="fs20">&#xe647;</em>返回</a>
+      <div class="weui-flex__item txt_cen fs18 col_f">留言</div>
+      <div class="header_r fr fs16 col_t"><em class="fs20">&#xe62a;</em>搜索</div>
+   </div>
+
+   <div class="weui-panel weui-panel_access mt0 comment mt55">
+      <div class="weui-panel__hd fs18 col_0">全部留言<em class="fs14 col_6">(1024)</em></div>
+      <div class="weui-panel__bd meg_list">
+            <div class="weui-media-box weui-media-box_appmsg">
+              <div class="weui-media-box__bd">
+                <h4 class="weui-media-box__title clearfix mb10">
+                    <a href="###" class="tx_img ov_h fl mr10"><img class="i_w" src="images/grzx1.png"></a>
+                    <span class="fl fs16 col_3">评论者名字 <em class="col_6 fs12">10-24 08:23</em></span>
+                </h4>
+                <p class="weui-media-box__desc col_0 fs16 mb10">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+              </div>
+            </div>
+            <div class="weui-media-box weui-media-box_appmsg">
+              <div class="weui-media-box__bd">
+                <h4 class="weui-media-box__title clearfix mb10">
+                    <a href="###" class="tx_img ov_h fl mr10"><img class="i_w" src="images/grzx1.png"></a>
+                    <span class="fl fs16 col_3">评论者名字 <em class="col_6 fs12">10-24 08:23</em></span>
+                </h4>
+                <p class="weui-media-box__desc col_0 fs16 mb10">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+              </div>
+            </div>
+            <div class="weui-media-box weui-media-box_appmsg">
+              <div class="weui-media-box__bd">
+                <h4 class="weui-media-box__title clearfix mb10">
+                    <a href="###" class="tx_img ov_h fl mr10"><img class="i_w" src="images/grzx1.png"></a>
+                    <span class="fl fs16 col_3">评论者名字 <em class="col_6 fs12">10-24 08:23</em></span>
+                </h4>
+                <p class="weui-media-box__desc col_0 fs16 mb10">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+              </div>
+            </div>
+      </div>
+   </div>
+   
+<!-- <form method="GET" action="ly.html" name="message"> -->
+   <div class="pad_15 message box_s bg_f">
+       <p class="fs20  col_0 mb10">在线留言</p>
+       <div class="weui-flex">
+          <div class="weui-flex__item">
+              <textarea class="pad_10 fs16 col_6 inp_on weui-flex__item" placeholder='请输入留言...' name="ly"></textarea>
+          </div>
+       </div>
+       <a href="javascript:;" class="weui-btn weui-btn_warn bg_gg sub_a">提交留言</a>
+   </div>
+<!-- </form> -->
+
+
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-weui.min.js"></script>
+    <script>
+
+        $('.sub_a').on('click', function() {
+            $.toast.prototype.defaults.duration='1500';
+            var val =$('.inp_on').val();
+                val.replace(/\n/g, '_@').replace(/\r/g, '_#').replace(/ /gi,"&nbsp;").replace(/_@/g, '<br/>').replace(/_#_@/g, '<br/>');
+            if(val==""){
+                $.toast("请填写留言再提交！", "text");
+            }else{
+                var id='留言人id';
+                var photo = 'images/grzx1.png';
+                var name = '留言人姓名';
+                var today =  new Date();//获取系统当前时间
+                var hou = today.getHours();
+                var miu = today.getMinutes();
+                if(miu<10){
+                    miu='0'+miu;
+                }
+                var rq = today.getMonth()+1+"-"+today.getDate();
+                var sj = hou+":"+miu;
+                $.ajax({
+                      type:'GET',
+                      url:'index.html',
+                      data:{ 
+                        id:id,
+                        text:val
+                      },
+                      success:function(date){
+                        $.toast("留言成功", "text");
+                        $('.meg_list').prepend("<div class='weui-media-box weui-media-box_appmsg'><div class='weui-media-box__bd'><h4 class='weui-media-box__title clearfix mb10'><a href='###' class='tx_img ov_h fl mr10'><img class='i_w' src="+photo+"></a><span class='fl fs16 col_3'>"+name+" <em class='col_6 fs12'>"+rq+" "+sj+"</em></span></h4><p class='weui-media-box__desc col_0 fs16 mb10'>"+val+"</p></div></div>");
+                      },
+                      
+                      error:function(){ 
+                        alert("请求失败");
+                      }
+                })
+            }
+        });
+    </script>
+</body>
+</html>

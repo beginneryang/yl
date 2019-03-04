@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑</title>
+    <meta id="viewport" name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-weui.min.css">
+    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body class="grxx iconfont">
+    <div class="weui-flex header bg_gg pd_rl15 box_s clearfix">
+      <a href="javascript:history.go(-1);" class="header_l col_f fl fs16"><em class="fs20">&#xe647;</em>返回</a>
+      <div class="weui-flex__item txt_cen fs18 col_f">编辑</div>
+      <div class="header_r fr fs16 col_t"><em class="fs20">&#xe62a;</em>搜索</div>
+    </div>
+
+<form method="POST" action="grxx.html" name="info">
+    <div class="weui-cells mt55 lists">
+      <div class="weui-cell">
+         <div class="weui-cell__bd">
+            <p class="fs16">头像</p>
+         </div>
+         <div class="weui-cell__ft ft_img">
+            <span class="inp_img ov_h fr"><img id="photo" src="images/grzx1.png"></span>
+            <input type="file" name="tx" id="chooseFile">
+         </div>
+      </div>
+      <div class="weui-cell">
+         <div class="weui-cell__bd">
+            <p class="fs16">用户名</p>
+         </div>
+         <div class="weui-cell__ft">
+            <input type="text" name="name" class="bor_0 fs16 txt_right" value="李晓明">
+         </div>
+      </div>
+     
+      <div class="weui-cell">
+         <div class="weui-cell__bd">
+            <p class="fs16">邮箱</p>
+         </div>
+         <div class="weui-cell__ft">
+           <input type="text" name="name" class="bor_0 fs16 txt_right" value="132456@qq.com">
+         </div>
+      </div>
+      <div class="weui-cell">
+         <div class="weui-cell__bd">
+            <p class="fs16">手机号</p>
+         </div>
+         <div class="weui-cell__ft">
+           <input type="text" name="name" id='phone' class="bor_0 fs16 txt_right" value="13513102336" disabled="ture">
+         </div>
+      </div>
+    </div>
+
+    <div class="footer_but pd_rl15 box_s">
+       <a href="javascript:document:info.submit();" class="weui-btn weui-btn_warn bg_gg">确认修改</a>
+    </div>
+</form>
+
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-weui.min.js"></script>
+    <script>
+        var photo = document.getElementById("photo");
+        var chooseFile = document.getElementById("chooseFile");
+        chooseFile.onchange = function(){
+
+            var file = this.files[0];
+            if (window.FileReader) {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = function (e) {
+                    photo.setAttribute("src",e.target.result);
+                };
+            }
+        };
+    </script>
+</body>
+</html>
